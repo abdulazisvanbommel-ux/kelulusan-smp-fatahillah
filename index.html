@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Pengumuman Kelulusan SMP Fatahillah</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#0f172a,#1e3a8a);
+    padding:20px;
+}
+
+.card{
+    width:100%;
+    max-width:420px;
+    background:white;
+    border-radius:20px;
+    padding:35px;
+    box-shadow:0 15px 35px rgba(0,0,0,.2);
+    text-align:center;
+}
+
+.logo{
+    font-size:60px;
+}
+
+h1{
+    color:#0f172a;
+    margin-top:10px;
+    font-size:26px;
+}
+
+p{
+    color:#64748b;
+    margin-top:8px;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    margin-top:15px;
+    border:1px solid #cbd5e1;
+    border-radius:10px;
+    font-size:15px;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    margin-top:20px;
+    border:none;
+    border-radius:10px;
+    background:#2563eb;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+
+#hasil{
+    margin-top:20px;
+}
+
+.lulus{
+    background:#dcfce7;
+    color:#166534;
+    padding:15px;
+    border-radius:10px;
+}
+
+.tidak{
+    background:#fee2e2;
+    color:#991b1b;
+    padding:15px;
+    border-radius:10px;
+}
+
+.footer{
+    margin-top:20px;
+    font-size:12px;
+    color:#94a3b8;
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+
+    <div class="logo">🎓</div>
+
+    <h1>SMP FATAHILLAH</h1>
+
+    <p>Pengumuman Kelulusan Tahun Pelajaran 2025/2026</p>
+
+    <input type="text" id="nisn" placeholder="Masukkan NISN">
+
+    <input type="text" id="nama" placeholder="Masukkan Nama Lengkap">
+
+    <button onclick="cekKelulusan()">
+        CEK KELULUSAN
+    </button>
+
+    <div id="hasil"></div>
+
+    <div class="footer">
+        © SMP Fatahillah
+    </div>
+
+</div>
+
+<script>
+
+const siswa = [
+{
+    nisn:"0089202228",
+    nama:"Aisyah Nur Mutiara Rahma",
+    status:"LULUS"
+},
+{
+    nisn:"0097785800",
+    nama:"Alfira Ramadhani",
+    status:"LULUS"
+},
+{
+    nisn:"0094278982",
+    nama:"Amalia Syifah",
+    status:"LULUS"
+},
+{
+    nisn:"0056978693",
+    nama:"Anita Cuwan",
+    status:"LULUS"
+},
+{
+    nisn:"0098940277",
+    nama:"Humaira Ayu Putri",
+    status:"LULUS"
+},
+{
+    nisn:"0094035847",
+    nama:"Jihan Putri Maulidiya",
+    status:"LULUS"
+},
+{
+    nisn:"0116321712",
+    nama:"Nadiyya Dinara Fatin",
+    status:"LULUS"
+},
+{
+    nisn:"0102408433",
+    nama:"Ryza Ryzqiyah",
+    status:"LULUS"
+},
+{
+    nisn:"0105410515",
+    nama:"Saskia Nur Azizah",
+    status:"LULUS"
+},
+{
+    nisn:"0092431049",
+    nama:"Sukmawati",
+    status:"LULUS"
+},
+{
+    nisn:"0095104927",
+    nama:"Yasmin Nur Fadillah",
+    status:"LULUS"
+},
+{
+    nisn:"3112049472",
+    nama:"Muhammad Alfauziyanto",
+    status:"LULUS"
+},
+{
+    nisn:"0079585793",
+    nama:"Muhammad Raihan",
+    status:"TIDAK LULUS"
+},
+{
+    nisn:"3094511446",
+    nama:"Barnest Alvaro Gadi",
+    status:"TIDAK LULUS"
+}
+];
+
+function cekKelulusan(){
+
+    let nisn = document.getElementById("nisn").value.trim();
+    let nama = document.getElementById("nama").value.trim().toLowerCase();
+
+    let data = siswa.find(
+        s => s.nisn === nisn &&
+        s.nama.toLowerCase() === nama
+    );
+
+    let hasil = document.getElementById("hasil");
+
+    if(data){
+
+        if(data.status === "LULUS"){
+
+            hasil.innerHTML = `
+            <div class="lulus">
+                <h2>🎉 SELAMAT!</h2>
+                <p><b>${data.nama}</b></p>
+                <p> Selamat Anda dinyatakan <b>LULUS</b></p>
+            </div>
+            `;
+
+        }else{
+
+            hasil.innerHTML = `
+            <div class="tidak">
+                <h2>📢 PENGUMUMAN</h2>
+                <p><b>${data.nama}</b></p>
+                <p> MOHON MAAF Anda dinyatakan <b>TIDAK LULUS</b></p>
+            </div>
+            `;
+        }
+
+    }else{
+
+        hasil.innerHTML = `
+        <div class="tidak">
+            Data tidak ditemukan
+        </div>
+        `;
+    }
+}
+
+</script>
+
+</body>
+</html>
